@@ -1,5 +1,5 @@
 import React from 'react';
-import nanoid from 'nanoid';
+//import {nanoid} from 'nanoid';
 
 export default class TodoList extends React.Component {
   state = {
@@ -17,7 +17,7 @@ export default class TodoList extends React.Component {
   };
 
   createTodo = () => {
-    const newTodo = { id: nanoid(), name: this.state.inputValue };
+    const newTodo = { id: this.state.todos.length+1, name: this.state.inputValue };
     this.setState({ todos: [...this.state.todos, newTodo], inputValue: '' });
   };
 
@@ -26,7 +26,7 @@ export default class TodoList extends React.Component {
       <div data-testid="TodoList">
         <p data-testid="todoCount">{this.state.todos.length} todos</p>
         {this.state.todos.map((todo, i) => (
-          <div className="todo" data-testid="todo">
+          <div className="todo" data-testid="todo" key = {i}>
             <span className="name">{todo.name}</span>
             <br />
             <button
